@@ -1,4 +1,6 @@
-const mysql = require('mysql2');
+const express = require('express');
+
+const { Pool } = require('pg');
 
 class Database {
     constructor (options) {
@@ -7,7 +9,7 @@ class Database {
     }
 
     validate() {
-        const { host, iser, password, database } = this.options;
+        const { host, user, password, database } = this.options;
         if(!host || !user || !password || !database)
             throw new Error('Database configuration is Invalid.');
         return;
@@ -16,7 +18,7 @@ class Database {
     connect () {
         this.validate();
 
-        const {host, user,password, database } = this.options;
+        const { host, user, password, database } = this.options;
 
         this.db = mysql.createConnection(
             {
