@@ -1,4 +1,4 @@
-const { prompt } = require("inquirer");
+const { prompt, default: inquirer } = require("inquirer");
 const {
   MainMenuQuestions,
   AddDepartmentQuestions,
@@ -7,23 +7,29 @@ const {
   UpdateEmployeeRoleQuestions,
 } = require("./questions.js");
 const EmployeeDatabase = require("./db/EmployeeDatabase.js");
+const { password } = require("pg/lib/defaults.js");
+
+require('dotenv').config();
 
 const db = new EmployeeDatabase({
   host: "localhost",
-  user: "postgres",
-  password: "Siyona12!",
-  database: "employees_db",
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 db.connect();
 
 const doMenuQuestions = () => {
   prompt(MainMenuQuestions).then((response) => {
+    console.log(response);
     switch (response.option) {
       case "view_departments":
+        console.log('department case');
         view_departments();
         break;
-      case "view_roles":
+      case "view_role":
+        console.log('role case');
         view_roles();
         break;
       case "view_employees":
@@ -47,6 +53,7 @@ const view_departments = () => {
 };
 
 const view_roles = () => {
+  console.log('view roles');
   db.getRoles().then((results) => {
     console.table(results);
     doMenuQuestions();

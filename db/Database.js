@@ -22,11 +22,15 @@ class Database {
     this.db = new Pool(
       {
         // TODO: Enter PostgreSQL username
-        user: "postgres",
+        //user: "postgres",
         // TODO: Enter PostgreSQL password
-        password: "password",
+       // password: "password",
+        //host: "localhost",
+       // database: "employees",
         host: "localhost",
-        database: "employees",
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,  
       },
       console.log(`Connected to the movies_db database.`)
     );

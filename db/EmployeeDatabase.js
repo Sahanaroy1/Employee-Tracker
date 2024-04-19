@@ -17,11 +17,13 @@ class EmployeeDatabase extends Database {
   }
 
   getRoles() {
+    console.log('test');
     return new Promise((resolve, reject) => {
       this.query(
         `SELECT role.id, role.title, CONCAT('$', FORMAT(salary, 0), 'p/a) as salary, department.name as department_name FROM role INNER JOIN Department ON role.department_id = Department.id`,
         (err, results) => {
           if (err) {
+            console.log(err);
             reject(err);
           }
           resolve(results.rows);
