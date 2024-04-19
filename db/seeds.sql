@@ -8,8 +8,8 @@ INSERT INTO role (id, title, salary, department_id) VALUES (2, 'Lead Engineer', 
 INSERT INTO role (id, title, salary, department_id) VALUES (3, 'Legal Team Lead', 200000, 2);
 INSERT INTO role (id, title, salary, department_id) VALUES (4, 'Lawyer', 180000, 2);
 INSERT INTO role (id, title, salary, department_id) VALUES (5, 'Sales Lead', 100000, 3);
-INSERT INTO role (id, title, salary, department_id) VALUES (6, 'Salesperson' 80000, 3);
-INSERT INTO role (id, title, salary, department_id) VALUES (7, 'Accountant' 150000, 4);
+INSERT INTO role (id, title, salary, department_id) VALUES (6, 'Salesperson', 80000, 3);
+INSERT INTO role (id, title, salary, department_id) VALUES (7, 'Accountant', 150000, 4);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES (1, 'John', 'Deacon', 5, NULL);
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES (2, 'Joseph', 'Nooney', 6, 1);
