@@ -74,10 +74,8 @@ const add_department = () => {
     .then((response) => {
      db.addDepartment(response).then((results) => {
           console.log("\n", results, "\n");
-        doMenuQuestions();
-       
+        doMenuQuestions(); 
       });
-      console.log('test');
     });
 };
 
@@ -110,12 +108,12 @@ const add_employee = () => {
         name: role_summary,
       });
     });
-    db.getEmployee().then((results) => {
+    db.getEmployees().then((results) => {
       const managerQuestion = AddEmployeeQuestions[3];
-      results.forEach((employee) => {
+      Array.from(results).forEach((employee) => {
         managerQuestion.choices.push({
           value: employee.id,
-          name: employee.name,
+          name: employee.name ,
         });
       });
 
@@ -136,15 +134,15 @@ const add_employee = () => {
 
 const update_role = () => {
   db.getEmployees().then((results) => {
-    const employeeQuestion = UdateEmployeeRoleQuestions[0];
-    results.forEach((employee) => {
+    const employeeQuestion = UpdateEmployeeRoleQuestions[0];
+    Array.from(results).forEach((employee) => {
       employeeQuestion.choices.push({
         value: employee.id,
         name: employee.name,
       });
     });
     db.getRoles().then((results) => {
-      const releQuestion = UpdateEmployeeRoleQuestions[1];
+      const roleQuestion = UpdateEmployeeRoleQuestions[1];
       results.forEach((role) => {
         roleQuestion.choices.push({
           value: role.id,
@@ -152,7 +150,7 @@ const update_role = () => {
         });
       });
 
-      inquirer.prompt(UpdateEmployeeRoleQuestions).then((response) => {
+      prompt(UpdateEmployeeRoleQuestions).then((response) => {
         db.updateEmployeeRole(response).then((results) => {
           console.log("\n", results, "\n");
           doMenuQuestions();

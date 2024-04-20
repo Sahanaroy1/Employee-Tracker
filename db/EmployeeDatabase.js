@@ -34,7 +34,8 @@ class EmployeeDatabase extends Database {
   getEmployees() {
     return new Promise((resolve, reject) => {
       this.db.query(
-        `SELECT * FROM employee INNER JOIN role ON employee.role_id = role.id`,
+        `SELECT *
+        FROM employee INNER JOIN role ON employee.role_id = role.id`,
         (err, results) => {
           if (err) {
             reject(err);
@@ -70,9 +71,6 @@ class EmployeeDatabase extends Database {
     };
 
     return new Promise((resolve, reject) => {
-      
-
-      console.log(roleData.title + roleData.salary + roleData.department_id);
       this.db.query(
         'INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)', 
         [roleData.title, roleData.salary, roleData.department_id], 
@@ -94,8 +92,10 @@ class EmployeeDatabase extends Database {
     };
 
     return new Promise((resolve, reject) => {
-      this.db.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)', [employee.first_name, employee.last_name, employee.role_id, employee.manager_id], (err, results) => {
-        if (err) {
+      this.db.query(
+        'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)', 
+      [employee.first_name, employee.last_name, employee.role_id, employee.manager_id], (err, results) => {
+      if (err) {
           reject(err);
         }
         resolve(
