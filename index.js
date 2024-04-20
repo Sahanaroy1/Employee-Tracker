@@ -1,4 +1,4 @@
-const { prompt, default: inquirer } = require("inquirer");
+const { prompt } = require("inquirer");
 const {
   MainMenuQuestions,
   AddDepartmentQuestions,
@@ -7,16 +7,16 @@ const {
   UpdateEmployeeRoleQuestions,
 } = require("./questions.js");
 const EmployeeDatabase = require("./db/EmployeeDatabase.js");
-const { password } = require("pg/lib/defaults.js");
+//const { password } = require("pg/lib/defaults.js");
 
 require('dotenv').config();
 
-const db = new EmployeeDatabase({
-  host: "localhost",
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+const db = new EmployeeDatabase(
+ // host: "localhost",
+  //user: process.env.DB_USER,
+ // password: process.env.DB_PASSWORD,
+  //database: process.env.DB_NAME,
+);
 
 db.connect();
 
@@ -70,13 +70,14 @@ const view_employees = () => {
 };
 
 const add_department = () => {
-  inquirer
-    .prompt(AddDepartmentQuestions)
+  prompt(AddDepartmentQuestions)
     .then((response) => {
-      db.addDepartment(response).then((results) => {
+     db.addDepartment(response).then((results) => {
           console.log("\n", results, "\n");
         doMenuQuestions();
+       
       });
+      console.log('test');
     });
 };
 
@@ -90,7 +91,7 @@ const add_role = () => {
       });
     });
 
-    inquirer.prompt(AddRoleQuestions).then((response) => {
+    prompt(AddRoleQuestions).then((response) => {
       db.addRole(response).then((results) => {
         console.log("\n", results, "\n");
         doMenuQuestions();
@@ -123,7 +124,7 @@ const add_employee = () => {
         name: "None",
       });
 
-      inquirer.prompt(AddDepartmentQuestions).then((response) => {
+      prompt(AddDepartmentQuestions).then((response) => {
         db.addEmployee(response).then((results) => {
           console.log("\n", results, "\n");
           doMenuQuestions();

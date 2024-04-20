@@ -8,7 +8,7 @@ const MainMenuQuestions = [
             {value: 'view_role', name: "view all roles"},
             {value: 'view_employees', name: "view all employees"},
             {value: 'add_department', name: "add a department"},
-            {value: 'add_role', name: "adda role"},
+            {value: 'add_role', name: "add a role"},
             {value: 'add_employee', name: "add an employee"},
             {value: 'update_role', name: "update an employee role"},
         ],
