@@ -17,7 +17,6 @@ class EmployeeDatabase extends Database {
   }
 
   getRoles() {
-    console.log('test');
     return new Promise((resolve, reject) => {
       this.db.query(
         `SELECT role.id, role.title, role.salary, department.name as department_name FROM role INNER JOIN Department ON role.department_id = Department.id`,
@@ -41,6 +40,35 @@ class EmployeeDatabase extends Database {
             reject(err);
           }
           resolve(results);
+        }
+      );
+    });
+  }
+
+  getEmployeesByRole() {
+    return new Promise((resolve, reject) => {
+      this.db.query(
+        `SELECT employee.id, first_name
+        FROM employee`,
+        (err, results) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(results.rows);
+        }
+      );
+    });
+  }
+
+  getManagers() {
+    return new Promise((resolve, reject) => {
+      this.db.query(
+        `SELECT manager_id, first_name FROM employee WHERE manager_id is NOT NULL`,
+        (err, results) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(results.rows);
         }
       );
     });
@@ -106,7 +134,7 @@ class EmployeeDatabase extends Database {
   }
 
   updateEmployeeRole(employee) {
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
       this.db.query(
         "UPDATE employee SET role_id=$1 WHERE id=$2",
         [employee.role_id, employee.employee_id],
