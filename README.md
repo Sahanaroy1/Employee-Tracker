@@ -23,3 +23,4 @@ https://github.com/Sahanaroy1/Employee-Tracker
 ## Walkthrough video URL:
 
 # Snippet of the Employee Tracker:
+<img width="1253" alt="Employee Tracker" src="https://github.com/Sahanaroy1/Employee-Tracker/assets/127791384/236550e7-6782-4f67-b553-71c5b0d98f07">
