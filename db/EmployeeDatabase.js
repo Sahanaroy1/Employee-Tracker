@@ -30,7 +30,7 @@ class EmployeeDatabase extends Database {
     });
   }
 
-  getEmployees() {
+  getEmployeesByRole() {
     return new Promise((resolve, reject) => {
       this.db.query(
         `SELECT *
@@ -45,25 +45,10 @@ class EmployeeDatabase extends Database {
     });
   }
 
-  getEmployeesByRole() {
+  getEmployees() {
     return new Promise((resolve, reject) => {
       this.db.query(
-        `SELECT employee.id, first_name
-        FROM employee`,
-        (err, results) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(results.rows);
-        }
-      );
-    });
-  }
-
-  getManagers() {
-    return new Promise((resolve, reject) => {
-      this.db.query(
-        `SELECT manager_id, first_name FROM employee WHERE manager_id is NOT NULL`,
+        `SELECT  * FROM employee INNER JOIN role ON employee.role_id = role.id`,
         (err, results) => {
           if (err) {
             reject(err);

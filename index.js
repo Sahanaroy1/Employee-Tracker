@@ -59,7 +59,7 @@ const view_roles = () => {
 
 const view_employees = () => {
   db.getEmployees().then((results) => {
-    console.table(results.rows);
+    console.table(results);
     doMenuQuestions();
   });
 };
@@ -103,20 +103,20 @@ const add_employee = () => {
           name: role_summary,
         });
       });
-    db.getEmployees().then((results) => {
+    db.getEmployeesByRole().then((results) => {
       const managerQuestion = AddEmployeeQuestions[3];
       Array.from(results).forEach((employee) => {
         managerQuestion.choices.push({
           value: employee.id,
-          name: employee.name ,
+          name: employee.first_name ,
         });
       });
-      db.getManagers().then((results) => {
+      db.getEmployees().then((results) => {
         const roleQuestions = AddEmployeeQuestions[3];
-        Array.from(results).forEach((manager) => {
+        Array.from(results).forEach((employee) => {
           roleQuestions.choices.push({
-            value: manager.manager_id,
-            name: manager.first_name,
+            value: employee.id,
+            name: employee.first_name,
           });
         });
     
@@ -132,7 +132,7 @@ const add_employee = () => {
 };
 
 const update_role = () => {
-    db.getEmployeesByRole().then((results) => {
+    db.getEmployees().then((results) => {
       const employeeQuestion = UpdateEmployeeRoleQuestions[0];
       Array.from(results).forEach((employee) => {
         employeeQuestion.choices.push({
